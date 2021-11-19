@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AR Disease Predection</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+
+    <style>
+        .arjs-loader {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .arjs-loader div {
+            text-align: center;
+            font-size: 1.25em;
+            color: white;
+        }
+    </style>
+
+    <script>
+      AFRAME.registerComponent('markerhandler', {
+        init: function () {
+          this.el.sceneEl.addEventListener('markerFound', (e) => {
+            if (e.target.getAttribute("id") === "tomato_disease") {
+              setTimeout(() => {
+                window.location = "http://localhost:3000/disease-detection"
+              }, 3000)
+            }
+            // redirect to custom URL e.g. google.com
+            // window.location = 'https://www.google.com/';
+          })
+        }
+      });
+    </script>
+</head>
+<body style="margin : 0; overflow: hidden;">
+
+<div class="arjs-loader">
+    <div class="flex flex-col">
+        <h2>Loading... Please Wait</h2>
+        <h2>You can point the camera at the objects that you wish to check for diseases.</h2>
+    </div>
+</div>
+
+<a-scene
+        vr-mode-ui="enabled: false;"
+        renderer="logarithmicDepthBuffer: true;"
+        embedded
+        arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
+>
+    <!--    1 B -->
+    <a-nft
+            id="tomato_disease"
+            type="nft"
+            url="assets/descriptors/disease_tomato/disease_tomato"
+            smooth="true"
+            smoothCount="10"
+            smoothTolerance=".01"
+            smoothThreshold="5"
+            emitevents="true"
+            markerhandler
+    >
+        <a-entity
+                gltf-model="assets/3DModels/tomato_unhealthy_ar.gltf"
+                scale="5 5 5"
+                position="0 0 0"
+        >
+        </a-entity>
+    </a-nft>
+
+    <!--    2 B -->
+    <a-nft
+            type="nft"
+            url="assets/descriptors/harmful_kira/harmful_kira"
+            smooth="true"
+            smoothCount="10"
+            smoothTolerance=".01"
+            smoothThreshold="5"
+    >
+        <a-entity
+                gltf-model="assets/3DModels/squash_bird_harmful_ar.gltf"
+                scale="5 5 5"
+                position="0 0 0"
+        >
+        </a-entity>
+    </a-nft>
+
+    <!--    3 G -->
+    <a-nft
+            type="nft"
+            url="assets/descriptors/healthy_mango/healthy_mango"
+            smooth="true"
+            smoothCount="10"
+            smoothTolerance=".01"
+            smoothThreshold="5"
+    >
+        <a-entity
+                gltf-model="assets/3DModels/Mango_healthy_ar.gltf"
+                scale="5 5 5"
+                position="0 0 0"
+        >
+        </a-entity>
+    </a-nft>
+
+    <!--    4  G-->
+    <a-nft
+            type="nft"
+            url="assets/descriptors/healthy_tomato/healthy_tomato"
+            smooth="true"
+            smoothCount="10"
+            smoothTolerance=".01"
+            smoothThreshold="5"
+    >
+        <a-entity
+                gltf-model="assets/3DModels/tomato_healthy_ar.gltf"
+                scale="5 5 5"
+                position="0 0 0"
+        >
+        </a-entity>
+    </a-nft>
+
+    <!--    5 G-->
+    <a-nft
+            type="nft"
+            url="assets/descriptors/not_harmful_kira_ladybug/not_harmful_kira_ladybug"
+            smooth="true"
+            smoothCount="10"
+            smoothTolerance=".01"
+            smoothThreshold="5"
+    >
+        <a-entity
+                gltf-model="assets/3DModels/lady_bird_not_harmful_AR.gltf"
+                scale="5 5 5"
+                position="0 0 0"
+        >
+        </a-entity>
+    </a-nft>
+
+    <!--    6 B-->
+    <a-nft
+            type="nft"
+            url="assets/descriptors/sick_mango/sick_mango"
+            smooth="true"
+            smoothCount="10"
+            smoothTolerance=".01"
+            smoothThreshold="5"
+    >
+        <a-entity
+                gltf-model="assets/3DModels/Mango_unhealthy_ar.gltf"
+                scale="5 5 5"
+                position="0 0 0"
+        >
+        </a-entity>
+    </a-nft>
+
+    <a-entity camera></a-entity>
+</a-scene>
+</body>
+</html>
